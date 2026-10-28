@@ -1,0 +1,59 @@
+{
+  "id": "./",
+  "name": "BrownHub Haul — luggage, handled",
+  "short_name": "BrownHub Haul",
+  "description": "Book a luggage collection in Accra, track every stage, and receive your bags against a four-digit PIN. An app by BrownHub Studio.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./#/book",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#fffbf7",
+  "theme_color": "#c82027",
+  "categories": ["travel", "business", "productivity"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book a pickup",
+      "short_name": "Book",
+      "description": "Price a haul and book a collection window",
+      "url": "./#/book",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Track a haul",
+      "short_name": "Track",
+      "description": "Follow your bags by tracking code",
+      "url": "./#/track",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Dispatch board",
+      "short_name": "Dispatch",
+      "description": "The depot manifest, behind the passphrase",
+      "url": "./#/dispatch",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BrownHub Haul — an app by BrownHub Studio</title>
+<meta name="description" content="BrownHub Haul collects your luggage from your home in Accra and delivers it to your destination — airport, hotel or another city. Live quote, tracking code and PIN-verified handover.">
+<meta name="theme-color" content="#c82027">
+<meta name="application-name" content="BrownHub Haul">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BrownHub Haul">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="styles/app.css">
+<!--BRAND-->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Haul is an app of BrownHub Studio: the strip names the studio and links back
+     to its site. Both the words and the URL are filled from /api/config, which the
+     server syncs from the studio's own site at boot. -->
+<div class="parentbar" id="parentbar">
+  <div class="wrap parentbar-in">
+    <a class="studio-link" id="studio-link" href="https://www.brownhub283.com/" target="_blank" rel="noopener">
+      <span class="dot" aria-hidden="true"></span>
+      <span id="studio-attribution">An app by BrownHub Studio</span>
+      <span class="studio-host" id="studio-host">brownhub283.com</span>
+      <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a class="studio-services" id="studio-services" href="https://www.brownhub283.com/services.html" target="_blank" rel="noopener">Studio services</a>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#/book">
+      <img src="assets/logo.png" alt="" width="44" height="44">
+      <span class="brand-txt">
+        <strong>BrownHub <em>Haul</em></strong>
+        <small>luggage, handled</small>
+      </span>
+    </a>
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <a href="#/book" data-tab="book">Book a pickup</a>
+      <a href="#/track" data-tab="track">Track</a>
+      <a href="#/dispatch" data-tab="dispatch">Dispatch</a>
+    </nav>
+    <div class="topbar-side">
+      <a class="pill wa" id="wa-top" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5 0-1.8-.2-3.7-1.6a12 12 0 0 1-3.7-4.7c-.3-.7-.4-1.6 0-2.2.2-.4.6-.7.9-.7h.7c.2 0 .4 0 .6.5l.7 1.6c.1.3 0 .5-.2.7l-.4.5c-.2.2-.1.4 0 .6a8 8 0 0 0 3.3 2.7c.3.1.4.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.6.8c.3.2.4.3.4.5 0 .1 0 .4-.1.7Z"/></svg>
+        WhatsApp us
+      </a>
+      <button class="pill install" id="install-app" type="button" hidden aria-expanded="false" aria-controls="install-sheet" aria-label="Install BrownHub Haul" title="Install BrownHub Haul">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v10m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>
+        <span>Install app</span>
+      </button>
+      <a class="pill" id="call-top" href="#" >Call the depot</a>
+    </div>
+  </div>
+</header>
+
+<div class="offline" id="offline" hidden>
+  <strong>Offline.</strong> The booking engine is not reachable at
+  <code id="api-host"></code>. Start it with <code>node server.mjs</code> and reload.
+</div>
+
+<main class="wrap" id="main">
+
+  <!-- ————————————————————————— BOOK ————————————————————————— -->
+  <section class="view" id="view-book" data-view="book">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Accra · collections from 06:00 · nationwide delivery</p>
+        <h1>Your luggage travels<br><em>ahead of you.</em></h1>
+        <p class="lede">
+          Leave your bags at home. We weigh and seal them at your door, move them on the
+          same manifest as everyone else's — and hand them to you at the airport, the hotel or the next
+          city, against a four-digit PIN.
+        </p>
+        <ul class="hero-facts">
+          <li><b>Chain of custody</b><span>Sealed tag, every stage stamped, PIN on handover</span></li>
+          <li><b>Insured leg</b><span>Transit cover up to GH₵60,000 declared value</span></li>
+          <li><b>You travel light</b><span>Check in at the desk with nothing but a document</span></li>
+        </ul>
+      </div>
+      <div class="hero-card" aria-hidden="true">
+        <svg class="suitcase" viewBox="0 0 240 180">
+          <defs>
+            <linearGradient id="gs" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#a97c3f"/><stop offset="1" stop-color="#7d5a2b"/>
+            </linearGradient>
+          </defs>
+          <rect x="34" y="42" width="172" height="118" rx="16" fill="url(#gs)"/>
+          <rect x="34" y="42" width="172" height="118" rx="16" fill="none" stroke="#2b2724" stroke-opacity=".25"/>
+          <rect x="86" y="18" width="68" height="30" rx="10" fill="none" stroke="#2b2724" stroke-width="7" stroke-opacity=".55"/>
+          <path d="M78 42v118M162 42v118" stroke="#faf7f2" stroke-opacity=".45" stroke-width="6"/>
+          <rect x="104" y="92" width="32" height="20" rx="5" fill="#e63946"/>
+          <circle cx="60" cy="166" r="9" fill="#2b2724"/><circle cx="180" cy="166" r="9" fill="#2b2724"/>
+          <path class="tag" d="M170 60h44a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6h-44z" fill="#faf7f2" stroke="#2b2724" stroke-opacity=".3"/>
+          <text x="180" y="79" class="tag-txt" fill="#e63946">BH</text>
+        </svg>
+        <div class="hero-strip">
+          <span class="dot live"></span><b id="hero-next">Next collection window</b><span id="hero-window">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <form class="card form" id="book-form" novalidate>
+        <fieldset>
+          <legend><span class="step">1</span> Where it starts, where it lands</legend>
+          <div class="grid-2">
+            <label class="field">
+              <span>Collect from <small>home, office or our desk</small></span>
+              <select name="fromId" id="fromId" required></select>
+            </label>
+            <label class="field">
+              <span>Deliver to <small>airport, hotel or another city</small></span>
+              <select name="toId" id="toId" required></select>
+            </label>
+          </div>
+          <label class="field">
+            <span>Door address / room <small>gate code, flat number, check-in desk…</small></span>
+            <input type="text" name="address" id="address" placeholder="No. 14 Olive Drive, House 3, Kokomlemle" autocomplete="street-address">
+          </label>
+          <div class="legline" id="legline">
+            <svg viewBox="0 0 300 24" class="route" aria-hidden="true">
+              <line x1="14" y1="12" x2="286" y2="12" stroke="currentColor" stroke-width="2" stroke-dasharray="5 6"/>
+              <circle cx="14" cy="12" r="6" fill="#e63946"/><circle cx="286" cy="12" r="6" fill="#a97c3f"/>
+            </svg>
+            <span id="leg-txt">Select a route to see the leg.</span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="step">2</span> What you're sending</legend>
+          <div class="grid-3">
+            <label class="field">
+              <span>Pieces</span>
+              <select name="pieces" id="pieces">
+                <option>1</option><option selected>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Total weight <small>kg</small></span>
+              <input type="number" name="weightKg" id="weightKg" min="1" max="240" step="1" value="22" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Declared value <small>GH₵, for cover</small></span>
+              <input type="number" name="declaredValue" id="declaredValue" min="0" step="100" value="4000" inputmode="numeric">
+            </label>
+          </div>
+          <div class="chips" role="group" aria-label="Handling">
+            <label class="chip"><input type="checkbox" name="fragile" id="fragile"><span>Fragile / white-glove</span></label>
+            <label class="chip"><input type="checkbox" name="insurance" id="insurance" checked><span>Transit cover</span></label>
+            <label class="chip"><input type="checkbox" name="oversize" id="oversize"><span>Oversize (sports / instrument)</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="step">3</span> When it moves</legend>
+          <div class="services" id="services" role="radiogroup" aria-label="Service level"></div>
+          <div class="grid-2">
+            <label class="field">
+              <span>Pick-up date</span>
+              <input type="date" name="pickupDate" id="pickupDate">
+            </label>
+            <label class="field">
+              <span>Collection window <small id="window-note">narrowed by the tier you pick</small></span>
+              <select name="pickupWindow" id="pickupWindow">
+                <option>06:00 – 08:00</option><option>08:00 – 10:00</option>
+                <option selected>10:00 – 12:00</option><option>12:00 – 14:00</option>
+                <option>14:00 – 16:00</option><option>16:00 – 18:00</option>
+                <option>18:00 – 20:00</option><option>20:00 – 22:00</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span>Flight / hotel reference <small>so the crew can time the handover</small></span>
+            <input type="text" name="reference" id="reference" placeholder="SK 508 · 15:40 departure, or Kwabilar Hotel room 7">
+          </label>
+          <label class="field">
+            <span>Notes for the collector</span>
+            <textarea name="notes" id="notes" rows="2" placeholder="Intercom is broken — call on arrival. Dog is loose in the yard."></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="step">4</span> Who we call</legend>
+          <div class="grid-2">
+            <label class="field">
+              <span>Traveller's name</span>
+              <input type="text" name="customerName" id="customerName" autocomplete="name" placeholder="Ama Boateng" required>
+            </label>
+            <label class="field">
+              <span>Phone <small>WhatsApp preferred</small></span>
+              <input type="tel" name="customerPhone" id="customerPhone" autocomplete="tel" placeholder="+233 53 558 3460" required>
+            </label>
+          </div>
+          <div class="grid-2">
+            <label class="field">
+              <span>Email <small>optional — the receipt goes here</small></span>
+              <input type="email" name="customerEmail" id="customerEmail" autocomplete="email" placeholder="you@example.com">
+            </label>
+            <label class="field">
+              <span>Promo code</span>
+              <input type="text" name="promo" id="promo" placeholder="BHHAUL10" autocapitalize="characters">
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-foot">
+          <button type="submit" class="btn primary" id="submit-btn">Book this haul</button>
+          <p class="fineprint">No payment now. You pay the driver or by WhatsApp Mobile Money when the
+            bags are sealed. Quote is held for 24 hours.</p>
+        </div>
+        <div class="errors" id="book-errors" role="alert" hidden></div>
+      </form>
+
+      <aside class="summary" id="summary" aria-live="polite">
+        <div class="card price">
+          <h2>Live quote</h2>
+          <ul class="lines" id="price-lines"></ul>
+          <div class="price-total">
+            <div><span>Subtotal</span><b id="t-sub">—</b></div>
+            <div class="disc" id="row-disc" hidden><span id="t-promo">Discount</span><b id="t-disc">—</b></div>
+            <div id="row-weekend" hidden><span>Weekend collection</span><b id="t-weekend">—</b></div>
+            <div><span>VAT 15%</span><b id="t-vat">—</b></div>
+            <div class="grand"><span>Total</span><b id="t-total">—</b></div>
+          </div>
+          <p class="sla" id="sla-note">—</p>
+          <ul class="warns" id="warns"></ul>
+        </div>
+        <div class="card how">
+          <h2>How the handover works</h2>
+          <ol>
+            <li><b>You book.</b> A collector is rostered the night before and calls with a 2-hour window.</li>
+            <li><b>We seal.</b> Each piece is weighed, tagged and sealed at your door by the collector.</li>
+            <li><b>It moves.</b> Your bags ride a locked manifest leg. You watch the status change here.</li>
+            <li><b>You receive.</b> The driver hands over only against your four-digit PIN.</li>
+          </ol>
+          <p class="fineprint">Need it inside two hours? <a id="wa-inline" href="#" target="_blank" rel="noopener">Message the depot on WhatsApp</a> — a person answers, not a bot.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="modal" id="confirm" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="confirm-h">
+        <button class="x" data-close aria-label="Close">×</button>
+        <p class="tick">Booking confirmed</p>
+        <h2 id="confirm-h">Your haul is on the manifest</h2>
+        <p class="conf-lead" id="conf-lead"></p>
+        <div class="conf-grid">
+          <div><span>Tracking code</span><b class="code" id="conf-code">—</b></div>
+          <div><span>Handover PIN</span><b class="code pin" id="conf-pin">—</b></div>
+          <div><span>Collect</span><b id="conf-when">—</b></div>
+          <div><span>Total</span><b id="conf-total">—</b></div>
+        </div>
+        <p class="fineprint">Keep the PIN private — it is the only thing the driver checks before releasing the bags.</p>
+        <div class="conf-actions">
+          <a class="btn primary" id="conf-wa" href="#" target="_blank" rel="noopener">Send details on WhatsApp</a>
+          <button class="btn" data-close>Book another</button>
+          <button class="btn ghost" id="conf-track">Track this haul</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ————————————————————————— TRACK ————————————————————————— -->
+  <section class="view" id="view-track" data-view="track" hidden>
+    <div class="page-head">
+      <h1>Where is my luggage?</h1>
+      <p>Enter the code on your booking receipt — it looks like <button class="linklike" id="demo-fill">BH-D3MO24</button>.</p>
+    </div>
+    <form class="search" id="track-form">
+      <input type="text" id="track-code" name="code" placeholder="BH-XXXXXX" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button class="btn primary" type="submit">Track it</button>
+    </form>
+    <div id="track-out" class="track-out"></div>
+  </section>
+
+  <!-- ————————————————————————— DISPATCH ————————————————————————— -->
+  <section class="view" id="view-dispatch" data-view="dispatch" hidden>
+    <div class="page-head">
+      <h1>Dispatch board</h1>
+      <p>The crew's view: every haul on the manifest, its stage, and the PIN check at the door.</p>
+    </div>
+    <div class="lockbar" id="lockbar"></div>
+    <div class="stats" id="stats"></div>
+    <div class="board-tools">
+      <div class="seg" id="status-filter" role="group" aria-label="Filter shipments by status"></div>
+      <input type="search" id="board-q" placeholder="Search code, traveller or place…" aria-label="Search shipments">
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+</main>
+
+<!-- Install is per-platform (Android has a prompt, iPhone has a recipe), so the
+     instruction sheet is built in the browser, never assumed in this markup. -->
+<div class="modal" id="install-sheet" hidden>
+  <div class="modal-card install-card" role="dialog" aria-modal="true" aria-labelledby="install-h">
+    <button class="x" id="install-close" aria-label="Close">×</button>
+    <p class="tick">Install</p>
+    <h2 id="install-h">Keep Haul on your home screen</h2>
+    <p class="conf-lead" id="install-lead"></p>
+    <ol class="install-steps" id="install-steps"></ol>
+    <p class="fineprint" id="install-note"></p>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <a class="foot-brand" id="foot-brand" href="https://www.brownhub283.com/" target="_blank" rel="noopener">
+        <img src="assets/logo.png" alt="BrownHub" width="52" height="52">
+        <p><strong>BrownHub Haul</strong><br><span id="foot-attribution">An app by BrownHub Studio</span></p>
+      </a>
+      <p class="foot-studio" id="foot-studio"></p>
+    </div>
+    <div>
+      <h3>Depot</h3>
+      <p id="foot-depot"></p>
+    </div>
+    <div>
+      <h3>Talk to a person</h3>
+      <p id="foot-contact"></p>
+    </div>
+    <div>
+      <h3>Hours</h3>
+      <p id="foot-hours"></p>
+    </div>
+  </div>
+  <p class="wrap copy">© <span id="year">2026</span> <span id="copy-parent">BrownHub Studio</span> · BrownHub Haul is a service of the studio. Prices include 15% VAT. Luggage travels at our risk up to the declared value you insure.</p>
+</footer>
+
+<script type="module" src="app/js/main.mjs"></script>
+</body>
+</html>

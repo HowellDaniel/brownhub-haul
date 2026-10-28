@@ -1,0 +1,4 @@
+data/
+.verify/
+*.log
+.DS_Store
