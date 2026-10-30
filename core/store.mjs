@@ -251,7 +251,7 @@ export class Store {
     s.history.push(event(next, note || STATUS_BY_KEY[next].note, 0, by || "dispatch"));
     s.updatedAt = now.toISOString();
     if (next === "out_for_delivery" && !s.driver)
-      s.driver = { name: "Kwesi Appiah", phone: "+233 55 398 0791", vehicle: "GT 4821-24 · Panel van" };
+      s.driver = { name: "Kwesi Appiah", phone: "+233 53 558 3460", vehicle: "GT 4821-24 · Panel van" };
     this.#flush();
     return { ok: true, shipment: s };
   }
@@ -345,7 +345,7 @@ export class Store {
       price,
       total: round(price.total),
       pinSeal: this.lock.seal("4729"), // the demo PIN, for the tracker's driver check
-      driver: { name: "Kwesi Appiah", phone: "+233 55 398 0791", vehicle: "GT 4821-24 · Panel van" },
+      driver: { name: "Kwesi Appiah", phone: "+233 53 558 3460", vehicle: "GT 4821-24 · Panel van" },
       photos: [],
       history: [
         event("booked", "Booked on the BrownHub site", -9),

@@ -64,7 +64,7 @@ export const FALLBACK = deepFreeze({
     app: "",
     page: "https://www.brownhub283.com/haul.html",
     whatsapp: "233535583460",
-    phone: "+233 55 398 0791",
+    phone: "+233 53 558 3460",
     email: "howelldaniel533@gmail.com",
     hours: "Mon–Sat 06:00–21:00 · Sun & holidays 09:00–18:00",
     depot: {
