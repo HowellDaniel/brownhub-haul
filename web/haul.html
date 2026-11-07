@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The same theme script the studio pages use: it reads the saved choice (or the
+     device's) and puts data-theme on <html> before the first paint, so this page
+     opens in the colour the visitor already chose on brownhub283.com. -->
+<script src="js/theme.js?v=2"></script>
+<title>BrownHub Haul — luggage collection & delivery | BrownHub Studio</title>
+<meta name="description" content="BrownHub Haul is BrownHub Studio's luggage service: we collect bags from a home or office in Accra, track them on a live manifest, and hand them over at Kotoka, a hotel or another city against a four-digit PIN.">
+<link rel="canonical" href="https://www.brownhub283.com/haul.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BrownHub">
+<meta property="og:title" content="BrownHub Haul — luggage, handled">
+<meta property="og:description" content="Luggage collection and delivery from BrownHub Studio. Book a pickup in Accra, track every stage, receive against a PIN.">
+<meta property="og:url" content="https://www.brownhub283.com/haul.html">
+<meta property="og:image" content="https://www.brownhub283.com/images/logo.png">
+<link rel="alternate" type="application/json" href="data/haul.json" title="BrownHub Haul service feed">
+<link rel="icon" href="icons/icon-192.png">
+<style>
+/* This page stands alone — it must render even if the stylesheet moves. The
+   tokens are the studio's own, copied from css/style.css so a visitor who lands
+   here from search still sees BrownHub, not a second brand. */
+:root{
+  --bg:#1b0b0c; --bg-alt:#26100f; --surface:#331517; --border:#4d2726;
+  --text:#f2e4de; --text-muted:#c3a79f; --accent:#f4545a; --accent-fill:#de2a2f;
+  --accent-2:#b17d41; --radius:14px; --max-w:1140px;
+  --accent-rgb:244,84,90; --accent-2-rgb:177,125,65;
+  --accent-fill-d:#c8232a; --header:rgba(27,11,12,.85);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:#fffbf7; --bg-alt:#f8efe7; --surface:#ffffff; --border:#e9d6c6;
+  --text:#26100f; --text-muted:#6e5248; --accent:#c82027; --accent-fill:#c82027;
+  --accent-2:#8a5e28;
+  --accent-rgb:200,32,39; --accent-2-rgb:138,94,40;
+  --accent-fill-d:#a8181f; --header:rgba(255,251,247,.88);
+  --shadow:0 10px 30px rgba(38,16,15,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+.wrap{width:100%;max-width:var(--max-w);margin-inline:auto;padding:0 1.25rem}
+header{border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;background:var(--header);backdrop-filter:blur(12px)}
+.nav{display:flex;align-items:center;gap:1.4rem;height:72px}
+.nav img{height:36px;width:auto}
+.nav nav{display:flex;gap:1.4rem;margin-left:auto;font-size:.92rem;color:var(--text-muted)}
+.nav nav a:hover{color:var(--text)}
+.nav .back{font-size:.85rem;color:var(--accent-2);white-space:nowrap}
+main{padding:2.6rem 0 3rem}
+.eyebrow{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:.7rem}
+h1{font-size:clamp(2.1rem,1.3rem + 3vw,3.4rem);line-height:1.05;letter-spacing:-.03em}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-muted);font-size:1.06rem;max-width:44rem;margin-top:1rem}
+.cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.72rem 1.25rem;font-weight:600;font-size:.94rem;border:1px solid var(--border)}
+.btn.primary{background:var(--accent-fill);border-color:var(--accent-fill);color:#fff}
+.btn.primary:hover{background:var(--accent-fill-d)}
+.btn.ghost{color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent)}
+.btn[hidden]{display:none}
+.facts{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.88rem}
+.facts b{display:block;color:var(--text);font-size:1rem}
+section{margin-top:2.8rem}
+h2{font-size:1.35rem;letter-spacing:-.02em;margin-bottom:.3rem}
+.sub{color:var(--text-muted);font-size:.95rem;margin-bottom:1.2rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;box-shadow:var(--shadow)}
+.card h3{font-size:1rem;margin-bottom:.35rem}
+.card p{color:var(--text-muted);font-size:.9rem}
+.card .n{display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;background:rgba(var(--accent-rgb),.12);color:var(--accent);font-size:.8rem;font-weight:700;margin-bottom:.6rem}
+.app-band{background:linear-gradient(150deg,rgba(var(--accent-rgb),.12),rgba(var(--accent-2-rgb),.12));border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);padding:1.5rem;display:grid;gap:1rem;grid-template-columns:1.4fr auto;align-items:center}
+.app-band h2{margin-bottom:.2rem}
+.app-band p{color:var(--text-muted);font-size:.94rem}
+.app-band .by{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:.5rem}
+footer{border-top:1px solid var(--border);padding:1.8rem 0;color:var(--text-muted);font-size:.88rem}
+.foot{display:grid;gap:1.2rem;grid-template-columns:1.4fr 1fr 1fr}
+footer h3{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);margin-bottom:.35rem}
+footer a:hover{color:var(--text)}
+.copy{margin-top:1.4rem;font-size:.78rem;color:var(--text-muted);opacity:.85}
+@media (max-width:720px){
+  .nav nav{display:none}
+  .app-band{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="BrownHub home"><img src="images/logo.png" alt="BrownHub" width="160" height="40"></a>
+    <nav aria-label="Site">
+      <a href="services.html">Services</a>
+      <a href="engineering.html">Website &amp; Software</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="back" href="index.html">← Back to the studio</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">BrownHub Studio · Luggage service</p>
+  <h1>Your luggage travels <em>ahead of you.</em></h1>
+  <p class="lead">
+    BrownHub Haul collects your bags from your home or office in Accra, moves them on a live
+    manifest, and hands them over at the airport, a hotel or the next city — against a four-digit PIN.
+    It is the studio's own app: the same people who design the brand also run the bags.
+  </p>
+  <div class="cta">
+    <a class="btn primary" id="open-app" href="#" hidden>Open BrownHub Haul</a>
+    <a class="btn ghost" id="wa-link" href="https://wa.me/233535583460" target="_blank" rel="noopener">Message the depot on WhatsApp</a>
+  </div>
+  <div class="facts">
+    <div><b>Collections from 06:00</b>Mon–Sat, Accra</div>
+    <div><b>Kotoka desk</b>Level 1 handover</div>
+    <div><b>Live tracker</b>Every stage, by code</div>
+  </div>
+
+  <section>
+    <h2>How a haul works</h2>
+    <p class="sub">Four steps, one manifest, no queue at the airport.</p>
+    <div class="grid">
+      <div class="card"><span class="n">1</span><h3>Book a pickup</h3><p>A collector is rostered the night before and calls with a two-hour window.</p></div>
+      <div class="card"><span class="n">2</span><h3>We seal and tag</h3><p>Each piece is weighed and sealed at your door. The tag matches the code on your receipt.</p></div>
+      <div class="card"><span class="n">3</span><h3>It moves</h3><p>Your bags ride a locked manifest leg. The tracker changes stage as they move.</p></div>
+      <div class="card"><span class="n">4</span><h3>PIN handover</h3><p>The driver releases the bags only against your four-digit PIN.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where it goes</h2>
+    <p class="sub">Built around how people actually leave Accra.</p>
+    <div class="grid">
+      <div class="card"><h3>Kotoka International</h3><p>Bags reach the BrownHub desk on Level 1 and wait for you — no check-in queue with a suitcase.</p></div>
+      <div class="card"><h3>Your hotel</h3><p>Delivered to the front desk against the PIN, so a late flight does not mean a late bag.</p></div>
+      <div class="card"><h3>Another city</h3><p>Kumasi, Takoradi, Tamale and the cross-border leg — priced on distance, not guesswork.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it costs</h2>
+    <p class="sub">A quote before you commit: base handling, distance, weight, pieces, and 15% VAT on top. Transit cover is optional and priced on the declared value.</p>
+    <div class="cta" style="margin-top:.2rem">
+      <a class="btn primary" id="open-app-2" href="#" hidden>Get a live quote</a>
+      <a class="btn ghost" href="contact.html">Talk to the studio</a>
+    </div>
+  </section>
+
+  <section class="app-band">
+    <div>
+      <p class="by" id="attribution">An app by BrownHub Studio</p>
+      <h2 id="haul-name">BrownHub Haul</h2>
+      <p id="haul-blurb">
+        The booking, tracking and depot board are one app, built by the studio's software side.
+        Travellers book and track in the browser; the depot runs the manifest from the same code.
+      </p>
+    </div>
+    <a class="btn primary" id="open-app-3" href="#" hidden>Open the app</a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h3>BrownHub Studio</h3>
+        <p id="studio-address">ChrisPrintgh, Accra New Town, Accra, Ghana</p>
+        <p id="studio-hours">Mon–Fri, 9am–6pm GMT</p>
+      </div>
+      <div>
+        <h3>Haul depot</h3>
+        <p id="depot">New Heaven Preparatory School, Kokomlemle</p>
+        <p id="haul-hours">Mon–Sat 06:00–21:00 · Sun &amp; holidays 09:00–18:00</p>
+      </div>
+      <div>
+        <h3>Talk to a person</h3>
+        <p><a id="phone" href="tel:+233535583460">+233 53 558 3460</a></p>
+        <p><a id="email" href="mailto:howelldaniel533@gmail.com">howelldaniel533@gmail.com</a></p>
+      </div>
+    </div>
+    <p class="copy">
+      © <span id="year">2026</span> BrownHub Studio · <a href="legal.html">Terms</a> ·
+      <a href="privacy.html">Privacy</a> · <a href="security.html">Security</a> ·
+      <a href="index.html">brownhub283.com</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+/* The page reads the same feed the app reads (data/haul.json), so a change to
+ * the service — a new number, a new app URL — is one edit, not two. If the feed
+ * is missing or unreadable the static copy above stays exactly as it is. */
+(function () {
+  document.getElementById("year").textContent = new Date().getFullYear();
+  fetch("data/haul.json", { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (!j) return;
+      var h = j.haul || {}, s = j.studio || {}, p = j.parent || {};
+      var set = function (id, text) { var el = document.getElementById(id); if (el && text) el.textContent = text; };
+      set("attribution", j.attribution);
+      set("haul-name", h.brand);
+      set("studio-address", s.address);
+      set("studio-hours", s.hours);
+      set("depot", h.depot && h.depot.address);
+      set("haul-hours", h.hours);
+      if (h.phone) { var tel = document.getElementById("phone"); tel.textContent = h.phone; tel.href = "tel:" + h.phone.replace(/[^0-9+]/g, ""); }
+      if (h.email) { var mail = document.getElementById("email"); mail.textContent = h.email; mail.href = "mailto:" + h.email; }
+      if (h.whatsapp) { var wa = document.getElementById("wa-link"); wa.href = "https://wa.me/" + h.whatsapp; }
+      if (h.app) {
+        ["open-app", "open-app-2", "open-app-3"].forEach(function (id) {
+          var a = document.getElementById(id); if (a) { a.href = h.app; a.hidden = false; }
+        });
+      }
+      var app = document.getElementById("open-app");
+      if (h.app) app.href = h.app;
+    })
+    .catch(function () { /* the static page is the fallback */ });
+})();
+</script>
+</body>
+</html>

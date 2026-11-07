@@ -1,0 +1,41 @@
+# systemd unit for a VPS behind nginx.
+#
+#   sudo useradd --system --home /opt/haul --shell /usr/sbin/nologin haul
+#   sudo mkdir -p /opt/haul /var/lib/haul
+#   sudo rsync -a --exclude data --exclude .verify --exclude .git ./ /opt/haul/
+#   sudo chown -R haul:haul /opt/haul /var/lib/haul
+#   echo "HAUL_TOKEN='the depot passphrase'" | sudo tee /etc/haul.env
+#   sudo chmod 600 /etc/haul.env
+#   sudo cp deploy/haul.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now haul
+#
+# Then point an A record (haul.brownhub283.com) at the VPS and use
+# deploy/nginx-haul.conf for TLS. The feed's app value is that https URL.
+
+[Unit]
+Description=BrownHub Haul
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=haul
+Group=haul
+WorkingDirectory=/opt/haul
+EnvironmentFile=/etc/haul.env
+Environment=HOST=127.0.0.1
+Environment=PORT=8420
+Environment=DB=/var/lib/haul/shipments.json
+Environment=PHOTOS=/var/lib/haul/photos
+Environment=BRAND_CACHE=/var/lib/haul/brand.json
+ExecStart=/usr/bin/node /opt/haul/server.mjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/haul
+
+[Install]
+WantedBy=multi-user.target

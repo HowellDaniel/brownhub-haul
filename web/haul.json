@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "updated": "2026-10-27",
+  "parent": {
+    "name": "BrownHub",
+    "displayName": "BrownHub Studio",
+    "descriptor": "graphic design and website company in Accra, Ghana",
+    "site": "https://www.brownhub283.com/",
+    "tagline": "intellectual designs",
+    "city": "Accra, Ghana",
+    "logo": "https://www.brownhub283.com/images/logo.png"
+  },
+  "attribution": "An app by BrownHub Studio",
+  "tokens": {
+    "bg": "#fffbf7",
+    "surface": "#ffffff",
+    "border": "#e9d6c6",
+    "text": "#26100f",
+    "text-muted": "#6e5248",
+    "accent": "#c82027",
+    "accent-fill-hover": "#a8181f",
+    "accent-2": "#8a5e28",
+    "radius": "14px"
+  },
+  "studio": {
+    "email": "howelldaniel533@gmail.com",
+    "emails": ["howelldaniel533@gmail.com", "anghadaniel621@gmail.com"],
+    "phone": "+233 53 558 3460",
+    "whatsapp": "233502954541",
+    "whatsappLink": "https://wa.me/233502954541",
+    "address": "ChrisPrintgh, Accra New Town, Accra, Ghana",
+    "hours": "Mon–Fri, 9am–6pm GMT",
+    "services": [
+      "Logo Design",
+      "Brand Identity Design",
+      "Social Media Design",
+      "Flyer & Poster Design",
+      "Business Card Design",
+      "Brochure & Company Profile Design",
+      "Packaging Design",
+      "Marketing & Advertising Graphics",
+      "Custom Graphic Design",
+      "Website design and development",
+      "Website and software engineering",
+      "Luggage collection and delivery"
+    ]
+  },
+  "haul": {
+    "brand": "BrownHub Haul",
+    "tagline": "luggage, handled",
+    "app": "https://brownhub-haul.onrender.com/#/book",
+    "page": "https://www.brownhub283.com/haul.html",
+    "whatsapp": "233535583460",
+    "phone": "+233 53 558 3460",
+    "email": "howelldaniel533@gmail.com",
+    "hours": "Mon–Sat 06:00–21:00 · Sun & holidays 09:00–18:00",
+    "depot": {
+      "name": "BrownHub Depot",
+      "address": "New Heaven Preparatory School, Kokomlemle",
+      "maps": "https://maps.app.goo.gl/tof3h6ciUgqP9niWA"
+    },
+    "counter": {
+      "name": "KIA desk",
+      "address": "Kotoka International Airport, Level 1",
+      "maps": "https://maps.app.goo.gl/J1d1eDiNE7C7bBoz8"
+    }
+  }
+}

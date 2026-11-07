@@ -1,0 +1,23 @@
+# the manifest is production data, not source
+data/
+*.tmp
+
+# the key that seals every handover PIN. Never commit it, never lose it, and do
+# not put it in a backup you would be willing to read in a shared drive.
+*.key
+data/secret.key
+
+# custody photos — travellers' faces, bag tags, door numbers
+data/photos/
+photos/
+
+# verification scratch: throwaway DBs, photo stores, Chrome profiles, captures
+.verify/*.json
+.verify/*.log
+.verify/shots/
+.verify/*-profile/
+.verify/photos/
+.verify/*-photos*/
+.verify/webkit/probe
+
+.DS_Store
