@@ -424,3 +424,34 @@ main{min-height:70vh}
   .airport-motion.is-live{transform:perspective(1200px) rotateY(.4deg) scale(1.01)}
 }
 .conf-email.is-warning{color:var(--warn);font-weight:600}
+
+/* ── Locale picker ── */
+.locale{position:relative}
+.locale__btn{display:inline-flex;align-items:center;gap:.5em;padding:6px 10px;border:0;border-radius:var(--r-s);
+  background:none;color:color-mix(in srgb,var(--card) 75%,transparent);font-family:var(--sans);font-size:.82rem;font-weight:500;cursor:pointer;
+  transition:color .3s,background-color .3s}
+.locale__btn:hover,.locale__btn[aria-expanded="true"]{color:var(--card);background:rgba(255,255,255,.08)}
+.locale__globe{flex:none}
+.locale__name{white-space:nowrap}
+.locale__caret{transition:rotate .3s ease}
+.locale.is-open .locale__caret{rotate:180deg}
+.locale__panel{position:absolute;top:calc(100% + 6px);right:0;z-index:130;display:none;
+  min-width:216px;max-height:min(58vh,420px);overflow:auto;padding:10px;
+  background:var(--night-3);border:1px solid color-mix(in srgb,var(--card) 22%,transparent);border-radius:var(--r);
+  box-shadow:var(--sh-l)}
+.locale.is-open .locale__panel{display:block}
+.locale__col{display:flex;flex-direction:column;gap:2px}
+.locale__col+.locale__col{margin-top:8px;padding-top:8px;border-top:1px solid color-mix(in srgb,var(--card) 10%,transparent)}
+.locale__group{font-size:.7rem;font-weight:600;color:color-mix(in srgb,var(--card) 50%,transparent);text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;margin:0}
+.locale__opt{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;
+  padding:8px 10px;border:0;border-radius:var(--r-s);background:none;color:color-mix(in srgb,var(--card) 75%,transparent);
+  font-family:var(--sans);font-size:.82rem;text-align:start;cursor:pointer;transition:background-color .2s,color .2s}
+.locale__opt:hover{background:rgba(255,255,255,.06);color:var(--card)}
+.locale__opt:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.locale__opt.is-current{color:var(--gold);font-weight:700}
+.locale__opt.is-current::after{content:"\2713";font-weight:700}
+@media(max-width:640px){
+  .locale__btn{min-height:44px;padding:8px 12px}
+  .locale__panel{right:-10px}
+}
+@media(prefers-reduced-motion:reduce){.locale__caret{transition:none}}

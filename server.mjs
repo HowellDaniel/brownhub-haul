@@ -475,7 +475,7 @@ function coerce(o = {}) {
 
 /** Only these prefixes are public. server.mjs, tools/ and data/ stay private
  *  even though they live under ROOT. */
-const PUBLIC = [/^index\.html$/, /^styles\//, /^app\//, /^core\//, /^assets\//, /^favicon\.ico$/, /^robots\.txt$/, /^site\.webmanifest$/, /^sw\.js$/];
+const PUBLIC = [/^index\.html$/, /^styles\//, /^app\//, /^core\//, /^assets\//, /^i18n\//, /^favicon\.ico$/, /^robots\.txt$/, /^site\.webmanifest$/, /^sw\.js$/];
 
 async function serveStatic(req, res, pathname) {
   const abs = normalize(join(ROOT, decodeURIComponent(pathname)));
