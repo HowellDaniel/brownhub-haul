@@ -96,6 +96,16 @@
     /* A code sample is not prose: the words inside it belong to the program, and a
        translated snippet is a snippet that no longer runs. */
     if (root.hasAttribute("data-i18n-off")) return;
+    // The motion script splits data-split text into character spans for animation,
+    // destroying the original text nodes. Translate via aria-label instead.
+    if (root.hasAttribute("data-split")) {
+      if (root.hasAttribute("aria-label") && trimKey(root.getAttribute("aria-label"))) {
+        var m = seenAttr.get(root);
+        if (!m) { m = {}; seenAttr.set(root, m); }
+        if (!m["aria-label"]) { m["aria-label"] = 1; record(null, root, "aria-label"); }
+      }
+      return;
+    }
     // The picker paints its own English names; they are labels, not prose.
     if (root.id === "lang-select" || root.id === "locale-list") return;
   if (root.classList && (root.className === "locale__name" || root.className === "locale__group" ||
