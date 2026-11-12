@@ -15,7 +15,7 @@
  *
  * Bump VERSION whenever a shell file changes; activate drops every other cache.
  */
-const VERSION = "v6";
+const VERSION = "v7";
 const CACHE = `brownhub-haul-${VERSION}`;
 
 const SHELL = [
