@@ -6,8 +6,12 @@
  * path fail back to the last good page rather than the browser's dinosaur.
  *
  * Rules:
- *   navigations  network-first, cache fallback — the studio's brand tokens are
- *                injected at serve time, so the freshest shell must win online.
+ *   navigations  stale-while-revalidate — once a traveller has opened Haul the
+ *                saved shell paints at once on every later launch, even while
+ *                the engine is cold; a background revalidation stores the
+ *                freshest shell (the studio's brand tokens are injected at
+ *                serve time) for the next open. Nothing is fetched until the
+ *                app is actually opened, so it never renders before it is.
  *   static shell network-first, cache fallback — new HTML must never run against
  *                an older cached module while online.
  *   api/ photos  never touched. A manifest, a PIN and a traveller's face do not
@@ -15,7 +19,7 @@
  *
  * Bump VERSION whenever a shell file changes; activate drops every other cache.
  */
-const VERSION = "v8";
+const VERSION = "v9";
 const CACHE = `brownhub-haul-${VERSION}`;
 
 const at = (path) => new URL(path, self.registration.scope).href;
@@ -76,16 +80,24 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       (async () => {
         const cache = await caches.open(CACHE);
-        try {
-          const fresh = await fetch(req);
-          if (fresh && fresh.ok) {
-            await cache.put(at("./"), fresh.clone());
-            await cache.put(at("./index.html"), fresh.clone());
-          }
-          return fresh;
-        } catch {
-          return (await cache.match(at("./"))) || (await cache.match(at("./index.html"))) || offlinePage();
+        const cached = (await cache.match(at("./"))) || (await cache.match(at("./index.html")));
+        const revalidate = fetch(req)
+          .then(async (fresh) => {
+            if (fresh && fresh.ok) {
+              await cache.put(at("./"), fresh.clone());
+              await cache.put(at("./index.html"), fresh.clone());
+            }
+            return fresh;
+          })
+          .catch(() => null);
+        // Open straight: hand back the shell already on the device at once and
+        // refresh it in the background for the next launch. On the very first
+        // open there is nothing saved yet, so wait for the live response.
+        if (cached) {
+          event.waitUntil(revalidate);
+          return cached;
         }
+        return (await revalidate) || offlinePage();
       })()
     );
     return;

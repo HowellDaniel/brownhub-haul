@@ -15,6 +15,19 @@ let places = null;
 export async function boot() {
   $("#year").textContent = String(new Date().getFullYear());
   mount("account", mountAccounts);
+
+  // Open straight: the booking form and the hash router are built from the
+  // static shell and the bundled pricing/zone modules — neither needs the
+  // engine. Paint them before the config round-trip, so a traveller lands on a
+  // working Book screen immediately, even on a cold start or with no connection.
+  mount("book", () => mountBooking());
+  wireScrollLinks();
+  route();
+  window.addEventListener("hashchange", route);
+  window.addEventListener("haul:track", (e) => {
+    location.hash = `#/track/${e.detail}`;
+  });
+
   let config;
   try {
     [config, places] = await Promise.all([api.config(), api.places()]);
@@ -27,13 +40,6 @@ export async function boot() {
   window.__HAUL = config;
   window.__HAUL_CONTACT = config.contact;
   paintChrome(config);
-  wireScrollLinks();
-  mount("book", () => mountBooking(config));
-  route();
-  window.addEventListener("hashchange", route);
-  window.addEventListener("haul:track", (e) => {
-    location.hash = `#/track/${e.detail}`;
-  });
 }
 
 function mount(name, fn) {
