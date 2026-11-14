@@ -15,52 +15,17 @@
  *
  * Bump VERSION whenever a shell file changes; activate drops every other cache.
  */
-const VERSION = "v7";
+const VERSION = "v8";
 const CACHE = `brownhub-haul-${VERSION}`;
-
-const SHELL = [
-  "./",
-  "./index.html",
-  "./site.webmanifest",
-  "./styles/app.css",
-  "./app/js/accounts.mjs",
-  "./app/js/api.mjs",
-  "./app/js/booking.mjs",
-  "./app/js/dispatch.mjs",
-  "./app/js/dom.mjs",
-  "./app/js/install.mjs",
-  "./app/js/main.mjs",
-  "./app/js/motion.mjs",
-  "./app/js/track.mjs",
-  "./core/codes.mjs",
-  "./core/pricing.mjs",
-  "./core/zones.mjs",
-  "./assets/logo.png",
-  "./assets/hero-airport-1000.jpg",
-  "./assets/hero-airport-2000.jpg",
-  "./assets/luggage-polished.jpg",
-  "./assets/hotel-arrival.jpg",
-  "./assets/kotoka-terminal.jpg",
-  "./assets/kumasi-airport.jpg",
-  "./assets/tamale-airport.jpg",
-  "./assets/accra-awa-fleet.jpg",
-  "./assets/courier-driver.jpg",
-  "./assets/icons/icon-192.png",
-  "./assets/icons/icon-512.png",
-  "./assets/icons/icon-maskable-512.png",
-  "./assets/icons/apple-touch-icon.png",
-];
 
 const at = (path) => new URL(path, self.registration.scope).href;
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE);
-      await cache.addAll(SHELL.map(at));
-      await self.skipWaiting();
-    })()
-  );
+  // No eager cache.addAll() here: pre-fetching the whole shell would render the
+  // app before the traveller ever opens it. The fetch handler below caches each
+  // resource the first time it is actually requested, so the offline copy builds
+  // up as the app is used, not before.
+  event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener("activate", (event) => {
